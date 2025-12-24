@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Applications - FalconCompute</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a1f3d;
+            --primary-light: #1a4f7f;
+            --accent-teal: #00d4ff;
+            --text-primary: #0f1419;
+            --text-secondary: #525252;
+            --text-light: #8b8b8b;
+            --bg-light: #fafafa;
+            --bg-white: #ffffff;
+            --border-subtle: #e8e8e8;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-primary: #f5f5f5;
+                --text-secondary: #d1d1d1;
+                --text-light: #a0a0a0;
+                --bg-light: #0a0e14;
+                --bg-white: #141821;
+                --border-subtle: #2a2a2a;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: clamp(1.2rem, 4vw, 1.4rem);
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            font-family: 'Merriweather', serif;
+        }
+
+        .logo-icon {
+            font-size: 1.6rem;
+            margin-right: 0.5rem;
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(26, 79, 127, 0.25);
+        }
+
+        /* ===== CONTENT ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+            padding: 3rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: 8px;
+            margin: -3rem -1.5rem 3rem -1.5rem;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2rem, 6vw, 3rem);
+            margin-bottom: 1rem;
+            font-family: 'Merriweather', serif;
+        }
+
+        .page-header p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            opacity: 0.95;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+            font-family: 'Merriweather', serif;
+        }
+
+        h3 {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin: 1.5rem 0 0.8rem;
+            color: var(--text-primary);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: clamp(0.95rem, 2vw, 1rem);
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-box {
+            background: linear-gradient(135deg, rgba(10, 31, 61, 0.02) 0%, rgba(0, 212, 255, 0.01) 100%);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-teal);
+            box-shadow: 0 12px 32px rgba(0, 212, 255, 0.08);
+        }
+
+        .feature-box h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .feature-box p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 2rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(26, 79, 127, 0.25);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 1.5rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-teal);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="logo"><span class="logo-icon">🦅</span>FalconCompute</a>
+            <a href="../../index.html" class="back-button">← Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <div class="container">
+        <div class="page-header">
+            <h1>🌍 Web Applications</h1>
+            <p>Full-stack web development and scalable application hosting.</p>
+        </div>
+
+        
+        <h2>Web Applications Development & Hosting</h2>
+        <p>Build, deploy, and scale modern web applications on enterprise infrastructure. From concept to production, we deliver high-performance web solutions.</p>
+
+        <h3>Web Application Services</h3>
+        <div class="feature-list">
+            <div class="feature-box">
+                <h4>Full-Stack Development</h4>
+                <p>Frontend frameworks, backend APIs, databases, and complete web applications.</p>
+            </div>
+            <div class="feature-box">
+                <h4>API Development</h4>
+                <p>RESTful APIs, GraphQL endpoints, API security, and comprehensive documentation.</p>
+            </div>
+            <div class="feature-box">
+                <h4>Static & Dynamic Sites</h4>
+                <p>Static site hosting with CDN, dynamic applications with serverless architecture.</p>
+            </div>
+            <div class="feature-box">
+                <h4>SSL & Security</h4>
+                <p>Certificate management, HTTPS enforcement, OWASP compliance, and security headers.</p>
+            </div>
+            <div class="feature-box">
+                <h4>Performance Optimization</h4>
+                <p>Caching, CDN integration, image optimization, and performance monitoring.</p>
+            </div>
+            <div class="feature-box">
+                <h4>Scalable Architecture</h4>
+                <p>Load balancing, database optimization, auto-scaling, and infrastructure elasticity.</p>
+            </div>
+        </div>
+
+        <h3>Development Stack</h3>
+        <ul>
+            <li><strong>Frontend:</strong> React, Vue, Angular, Next.js, and modern JavaScript frameworks</li>
+            <li><strong>Backend:</strong> Node.js, Python, C#/.NET, and cloud-native technologies</li>
+            <li><strong>Database:</strong> SQL Server, PostgreSQL, MongoDB, and Azure Cosmos DB</li>
+            <li><strong>Hosting:</strong> Azure App Service, Azure Container Instances, and Static Web Apps</li>
+        </ul>
+
+        <h3>Development Lifecycle</h3>
+        <ul>
+            <li>Requirements analysis and design</li>
+            <li>Agile development with iterative releases</li>
+            <li>Comprehensive testing (unit, integration, performance)</li>
+            <li>Security and compliance validation</li>
+            <li>Automated deployment pipelines</li>
+            <li>Production monitoring and support</li>
+        </ul>
+
+        <h3>Why FalconCompute for Web Applications</h3>
+        <ul>
+            <li><strong>Expertise:</strong> Full-stack developers with cloud architecture knowledge</li>
+            <li><strong>Performance:</strong> Applications optimized for speed and scalability</li>
+            <li><strong>Security:</strong> Built-in security from architecture to deployment</li>
+            <li><strong>DevOps:</strong> CI/CD pipelines for continuous delivery</li>
+            <li><strong>Support:</strong> Ongoing maintenance and optimization</li>
+        </ul>
+        
+
+        <a href="../../contact.html" class="cta-button">Get Started with Web Applications</a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>🦅 FalconCompute</h3>
+                <p>Specialized cloud infrastructure solutions delivered by expert engineers.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../index.html#expertise">Expertise</a></li>
+                    <li><a href="../../contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.7);">
+            <p>&copy; 2025 FalconCompute. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

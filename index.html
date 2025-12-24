@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FalconCompute - Enterprise Cloud & M365 Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a1f3d;
+            --primary-light: #1a4f7f;
+            --accent-teal: #00d4ff;
+            --accent-gold: #d4af37;
+            --text-primary: #0f1419;
+            --text-secondary: #525252;
+            --text-light: #8b8b8b;
+            --bg-light: #fafafa;
+            --bg-white: #ffffff;
+            --border-subtle: #e8e8e8;
+            --success: #10b981;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-primary: #f5f5f5;
+                --text-secondary: #d1d1d1;
+                --text-light: #a0a0a0;
+                --bg-light: #0a0e14;
+                --bg-white: #141821;
+                --border-subtle: #2a2a2a;
+                --primary: #ffffff;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            nav {
+                background: rgba(10, 14, 20, 0.85);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            max-height: 30px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            /* adjust 4px to make it thinner/thicker */
+
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+
+
+        .logo-icon {
+            height: 32px;
+            /* adjust as needed */
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: none;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-teal);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-teal);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            color: #000;
+            padding: 0.8rem 0.0rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.0px;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            padding: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: var(--bg-white);
+                border-bottom: 1px solid var(--border-subtle);
+                padding: 1.5rem 2rem;
+                gap: 1rem;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: clamp(3rem, 8vw, 6rem) 1.5rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('/assets/hero.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(10, 31, 61, 0.75) 0%, rgba(10, 31, 61, 0.85) 50%, rgba(10, 31, 61, 0.9) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: left;
+            color: rgb(255, 255, 255);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 4rem);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            font-family: 'Merriweather', serif;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons button,
+        .hero-buttons a {
+            padding: clamp(0.8rem, 3vw, 1.1rem) clamp(1.5rem, 5vw, 2.5rem);
+            font-size: clamp(0.95rem, 2.5vw, 1rem);
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .hero-buttons .primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .hero-buttons .primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-buttons .secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .hero-buttons .secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .hero-buttons button,
+            .hero-buttons a {
+                width: 100%;
+            }
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 6vw, 2.8rem);
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-family: 'Merriweather', serif;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            max-width: 650px;
+            margin: 0 auto 4rem;
+            font-size: clamp(0.95rem, 3vw, 1.15rem);
+            line-height: 1.7;
+            font-weight: 400;
+            color: #000000;
+        }
+
+        /* ===== EXPERTISE SECTION ===== */
+        .expertise {
+            padding: clamp(3rem, 5vw, 7rem) 1.5rem;
+        }
+
+        .expertise-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: clamp(2rem, 4vw, 3rem);
+            margin-top: 3rem;
+        }
+
+        .expertise-card {
+            background: linear-gradient(135deg, rgba(10, 31, 61, 0.02) 0%, rgba(0, 212, 255, 0.01) 100%);
+            padding: clamp(2rem, 4vw, 2.8rem);
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-teal);
+            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.08);
+            background: linear-gradient(135deg, rgba(10, 31, 61, 0.05) 0%, rgba(0, 212, 255, 0.03) 100%);
+        }
+
+        .expertise-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .expertise-card h3 {
+            font-size: clamp(1.15rem, 3vw, 1.35rem);
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .expertise-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+
+        /* ===== SPECIALIZED AREAS ===== */
+        .specialized {
+            padding: clamp(1rem, 5vw, 7rem) 1.5rem;
+            background: linear-gradient(180deg, rgba(10, 31, 61, 0.02) 0%, transparent 100%);
+        }
+
+        .specialized-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .specialized-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(2rem, 4vw, 2.5rem);
+            margin-top: 3rem;
+        }
+
+        .specialized-card {
+            background: var(--bg-white);
+            padding: clamp(2rem, vw, 2.5rem);
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+            border-left: 4px solid var(--accent-teal);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .specialized-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-teal), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .specialized-card:hover {
+            box-shadow: 0 16px 48px rgba(10, 31, 61, 0.08);
+            transform: translateY(-4px);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.01) 0%, transparent 100%);
+        }
+
+        .specialized-card:hover::before {
+            opacity: 1;
+        }
+
+        .specialized-icon {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .specialized-card h3 {
+            padding: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* ===== APPROACH SECTION ===== */
+        .approach {
+            background: var(--bg-white);
+            padding: clamp(2rem, 4vw, 2.8rem);
+        }
+
+        .approach-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(2rem, 4vw, 3rem);
+            margin-top: 3rem;
+        }
+
+        .approach-item {
+            padding: clamp(1.5rem, 4vw, 2rem);
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.02) 0%, transparent 100%);
+            transition: all 0.3s ease;
+        }
+
+        .approach-item:hover {
+            border-color: var(--accent-teal);
+            box-shadow: 0 12px 32px rgba(0, 212, 255, 0.06);
+        }
+
+        .approach-number {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: var(--accent-teal);
+            color: var(--primary);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .approach-item h4 {
+            font-size: clamp(1.1rem, 3vw, 1.25rem);
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .approach-item p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: clamp(0.9rem, 2.5vw, 0.95rem);
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features {
+            padding: clamp(3rem, 8vw, 7rem) 1.5rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(10, 31, 61, 0.01) 100%);
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: clamp(1.5rem, 3vw, 2rem);
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            padding: clamp(1.5rem, 3vw, 2rem);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .feature-badge {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(10, 31, 61, 0.05) 100%);
+            border: 2px solid var(--accent-teal);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .feature-item h4 {
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .feature-item p {
+            color: var(--text-light);
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            line-height: 1.6;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: clamp(3rem, 8vw, 6rem) 1.5rem;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            font-family: 'Merriweather', serif;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-section p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            margin-bottom: 2.5rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
+
+        .cta-section button {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: clamp(0.95rem, 2.5vw, 1rem);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .cta-section button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: clamp(2.5rem, 6vw, 5rem) 1.5rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: clamp(1rem, 2.5vw, 1.15rem);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: clamp(0.9rem, 2vw, 0.95rem);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent-teal);
+        }
+
+        .footer-section p {
+            font-size: clamp(0.9rem, 2vw, 0.95rem);
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: clamp(0.85rem, 2vw, 0.9rem);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-teal);
+        }
+
+        @media (max-width: 480px) {
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="FalconCompute Logo" class="logo-icon">
+                FalconCompute
+            </a>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#expertise" class="cta-button">Expertise</a></li>
+                <li><a href="#approach" class="cta-button">Our Approach</a></li>
+                <li><a href="contact.html" class="cta-button">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 style="font-size: 25px; color: #FFFFFF;text-shadow: 0 2px 8px rgba(0,0,0,0.75);">Enterprise Cloud & M365
+                Solutions Crafted for Excellence</h1>
+            <div style="margin-top: 10px;"> <!-- Adds gap above -->
+                <h1
+                    style="font-size: 15px; text-align: center; color: #ffffff;text-shadow: 0 2px 8px rgba(0,0,0,0.75);">
+                    Transform IT: Fast, Reliable, Cost-Effective Cloud.
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <div style="margin-top: 30px;"> <!-- Adds gap above --></div>
+    <p style="text-align:center;font-size:30px;">Empower your digital transformation with FalconCompute’s trusted cloud
+        expertise.
+    </p>
+    </div>
+    <!-- EXPERTISE SECTION -->
+    <section class="expertise" id="expertise">
+        <div class="expertise-container">
+            <h2 class="section-title">Core Expertise</h2>
+            <p class="section-subtitle">Built on deep technical knowledge, backed by certified engineers who
+                understand
+                enterprise cloud infrastructure at the highest level</p>
+            <div class="expertise-grid">
+                <a href="azure-infrastructure.html"
+                    style="background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/Azureinfra.png) center/contain no-repeat;"
+                    co class="expertise-card">
+                    <h3 style="color: #000000; font-size: 22px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 600;">
+                        Azure
+                        Infrastructure</h3>
+                    <p style="color: #000000; font-size: 20px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 500;">
+                        Deep
+                        mastery of
+                        Azure's complete
+                        ecosystem—from Virtual Networks and Application Gateways to
+                        Kubernetes and serverless architecture. We architect scalable, resilient systems.</p>
+                </a>
+                <a href="security-compliance.html"
+                    style="background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/security.png) center/contain no-repeat;"
+                    co class="expertise-card">
+                    <h3 style="color: #000000; font-size: 22px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 600;">
+                        Security & Compliance</h3>
+                    <p style="color: #000000; font-size: 20px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 500;">
+                        Enterprise-grade security
+                        frameworks with SSL/TLS integration, Key Vault management, Entra ID
+                        governance, and compliance standards. Trust is foundational.</p>
+                </a>
+                <a href="microsoft-365.html"
+                    style="background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/office365.png) center/contain no-repeat;"
+                    co class="expertise-card">
+                    <h3 style="color: #000000; font-size: 22px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 600;">
+                        Microsoft 365</h3>
+                    <p style="color: #000000; font-size: 20px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 500;">
+                        Seamless M365
+                        implementation,
+                        Entra ID administration, Teams & SharePoint architecture, and
+                        organizational security frameworks for modern workplaces.</p>
+                </a>
+                <a href="performance.html"
+                    style="background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/performance-opt.png) center/contain no-repeat;"
+                    class="expertise-card">
+                    <h3 style="color: #000000; font-size: 22px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 600;">
+                        Performance Optimization</h3>
+                    <p style="color: #000000; font-size: 20px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 500;">
+                        Every millisecond matters. We optimize infrastructure for maximum uptime, lightning-fast
+                        response
+                        times, and predictable scalability under any load.</p>
+                </a>
+                <a href="migration.html"
+                    style=" background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/migration.png) center/contain no-repeat;"
+                    co class="expertise-card">
+                    <h3 style="color: #000000; font-size: 22px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 600;">
+                        Infra
+                        Migration</h3>
+                    <p style="color: #000000; font-size: 20px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 500;">
+                        Strategic cloud migration
+                        approaches that simplify legacy transitions into secure, scalable, and future-ready Azure
+                        environments..</p>
+                </a>
+                <a href="cost-optimization.html"
+                    style=" background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/cost-opt.png) center/contain no-repeat;"
+                    co class="expertise-card">
+                    <h3 style="color: #000000; font-size: 22px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 600;">
+                        Cost
+                        Optimization</h3>
+                    <p style="color: #000000; font-size: 20px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 500;">
+                        Cost
+                        optimization through
+                        governance, rightsizing, and automation that converts cloud spend into measurable business
+                        value.</p>
+                </a>
+                <a href="web-applications.html"
+                    style=" background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/webapp.png) center/contain no-repeat;"
+                    co class="expertise-card">
+                    <h3 style="color: #000000; font-size: 22px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 600;">
+                        Web
+                        Applications</h3>
+                    <p style="color: #000000; font-size: 20px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 500;">
+                        Modern
+                        web applications, API
+                        development, container orchestration, and
+                        performance tuning built
+                        on enterprise infrastructure that scales seamlessly.</p>
+                </a>
+                <a href="devops.html"
+                    style=" background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/automation.png) center/contain no-repeat;"
+                    co class="expertise-card">
+                    <h3 style="color: #000000; font-size: 22px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 600;">
+                        Infra
+                        Automation</h3>
+                    <p style="color: #000000; font-size: 20px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 500;">
+                        Infrastructure-as-Code, ARM
+                        templates, PowerShell automation, and CI/CD pipelines that transform deployment complexity
+                        into
+                        elegant, repeatable workflows.</p>
+                </a>
+                <a href="modernization.html"
+                    style=" background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/Modernization.png) center/contain no-repeat;"
+                    co class="expertise-card">
+                    <h3 style="color: #000000; font-size: 22px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 600;">
+                        Modernization</h3>
+                    <p style="color: #000000; font-size: 20px;text-shadow: 0 0px 10px #FFFFFF;font-weight: 500;">
+                        Infrastructure-as-Code, ARM
+                        templates, PowerShell automation, and CI/CD pipelines that transform deployment complexity
+                        into
+                        elegant, repeatable workflows.</p>
+                </a>
+            </div>
+        </div>
+
+        <div style="margin-top: 100px;"> <!-- Adds gap above -->
+            <div class="section-divider-image">
+                <img src="assets/M365-Header.png" alt="Enterprise Cloud Architecture" width="100%" height="300px">
+            </div>
+    </section>
+    <!-- APPROACH SECTION -->
+    <section class="approach" id="approach">
+        <div class="approach-container">
+            <h2 class="section-title">Our Commitment to You</h2>
+            <p class="section-subtitle">We believe every project deserves excellence. Here's how we ensure yours
+                receives exactly that</p>
+            <div class="approach-grid">
+                <div class="approach-item">
+                    <div class="approach-number">1</div>
+                    <h4>Personal Attention</h4>
+                    <p>Whether you're a startup or enterprise, your project is handled by our best engineers. No
+                        project
+                        is too small for our expertise or commitment.</p>
+                </div>
+                <div class="approach-item">
+                    <div class="approach-number">2</div>
+                    <h4>Deep Technical Expertise</h4>
+                    <p>Certified engineers with hands-on experience designing and managing enterprise cloud
+                        infrastructure, AVD deployments, migrations, and security frameworks.</p>
+                </div>
+                <div class="approach-item">
+                    <div class="approach-number">3</div>
+                    <h4>Transparent Collaboration</h4>
+                    <p>We communicate clearly about timelines, challenges, and solutions. You're never left
+                        wondering
+                        about your infrastructure's status or direction.</p>
+                </div>
+                <div class="approach-item">
+                    <div class="approach-number">4</div>
+                    <h4>Quality-Driven Delivery</h4>
+                    <p>Rigorous testing, security validation, and performance benchmarking before anything goes to
+                        production. Excellence is non-negotiable.</p>
+                </div>
+                <div class="approach-item">
+                    <div class="approach-number">5</div>
+                    <h4>Ongoing Support</h4>
+                    <p>Your infrastructure doesn't stop evolving. We provide dedicated support, optimization, and
+                        guidance long after deployment.</p>
+                </div>
+                <div class="approach-item">
+                    <div class="approach-number">6</div>
+                    <h4>Best-in-Class Service</h4>
+                    <p>Consistent, reliable service delivery focused on your success. Our reputation is built on the
+                        infrastructure we deliver and the relationships we nurture.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features">
+        <div class="features-container">
+            <h2 class="section-title">Why Leading Companies Choose FalconCompute</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-badge">🔒</div>
+                    <h4>Security First</h4>
+                    <p>Enterprise-grade security practices integrated into every architecture decision we make.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-badge">⚡</div>
+                    <h4>High Performance</h4>
+                    <p>Optimized systems designed to handle growth without breaking a sweat.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-badge">📈</div>
+                    <h4>Scalability</h4>
+                    <p>Infrastructure that grows with your business, handling 10x traffic without redesign.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-badge">💡</div>
+                    <h4>Innovation</h4>
+                    <p>Access to cutting-edge cloud technologies and architectural patterns.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-badge">🛡️</div>
+                    <h4>Reliability</h4>
+                    <p>Built-in redundancy and disaster recovery for peace of mind.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-badge">💬</div>
+                    <h4>Expert Guidance</h4>
+                    <p>Strategic recommendations backed by deep industry experience and best practices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <h2>Ready to Transform Your Infrastructure?</h2>
+        <p>Schedule a conversation with our team. Let's discuss your challenges and explore how we can deliver
+            enterprise-grade solutions tailored to your vision.</p>
+        <button onclick="window.location.href='contact.html'">Contact Us</button>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>🦅 FalconCompute</h3>
+                <p>Specialized cloud infrastructure solutions delivered by expert engineers committed to your
+                    success.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="expertise/azure-infrastructure.html">Azure Cloud</a></li>
+                    <li><a href="specialized/avd.html">AVD Solutions</a></li>
+                    <li><a href="specialized/migration.html">Migration</a></li>
+                    <li><a href="expertise/security-compliance.html">Security</a></li>
+                    <li><a href="specialized/cost-optimization.html">Cost Optimization</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#expertise">Expertise</a></li>
+                    <li><a href="#approach">Approach</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                    <li><a href="#security">Security</a></li>
+                    <li><a href="#compliance">Compliance</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2025 FalconCompute. All rights reserved. | Built with precision for excellence.</div>
+            <div class="social-links">
+                <a href="https://x.com/YOURPAGE" title="LinkedIn">in</a>
+                <a href="https://instagram.com/YOURPAGE" title="Instagram">📷</a>
+                <a href="#twitter" title="Twitter">𝕏</a>
+                <a href="#github" title="GitHub">⚙</a>
+                <a href="#email" title="Email">✉</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

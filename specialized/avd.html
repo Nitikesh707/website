@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Virtual Desktop (AVD) Solutions | FalconCompute</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #64b5f6;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #1e3c72;
+            border-bottom: 3px solid #2a5298;
+            padding-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #2a5298;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #2a5298;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(42, 82, 152, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">FalconCompute</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="avd.html">AVD Solutions</a></li>
+                    <li><a href="security-governance.html">Security</a></li>
+                    <li><a href="migration.html">Migration</a></li>
+                    <li><a href="automation.html">Automation</a></li>
+                    <li><a href="web-apps.html">Web Apps</a></li>
+                    <li><a href="cost-optimization.html">Cost</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Azure Virtual Desktop Solutions</h1>
+            <p>Complete Azure Virtual Desktop implementation for secure, scalable remote work infrastructure.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section>
+            <h2>Enterprise-Grade Remote Work Infrastructure</h2>
+            <p>Deliver secure, scalable virtual desktops to your workforce. AVD provides enterprise-grade remote work infrastructure with Azure security and compliance.</p>
+        </section>
+
+        <section>
+            <h2>AVD Implementation Services</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Architecture Design</h3>
+                    <p>Comprehensive AVD architecture tailored to your organizational needs and security requirements.</p>
+                </div>
+                <div class="card">
+                    <h3>Host Pool Configuration</h3>
+                    <p>Pooled and personal host pools, session management, and user assignment strategies.</p>
+                </div>
+                <div class="card">
+                    <h3>Application Publishing</h3>
+                    <p>Publish individual applications without full desktop access for users who need specific tools.</p>
+                </div>
+                <div class="card">
+                    <h3>User Management</h3>
+                    <p>User provisioning, access control, group policies, and permission management.</p>
+                </div>
+                <div class="card">
+                    <h3>Performance Optimization</h3>
+                    <p>Session optimization, resource allocation, and performance monitoring for optimal experience.</p>
+                </div>
+                <div class="card">
+                    <h3>Cost Management</h3>
+                    <p>Right-sizing host pools, autoscaling configuration, and cost management strategies.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Why Choose FalconCompute for AVD?</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Deep AVD Expertise</h3>
+                    <p>Years of hands-on experience deploying and managing AVD at enterprise scale.</p>
+                </div>
+                <div class="card">
+                    <h3>Security First</h3>
+                    <p>Multi-layered security architecture with encryption, network isolation, and compliance frameworks.</p>
+                </div>
+                <div class="card">
+                    <h3>24/7 Support</h3>
+                    <p>Dedicated support team ensuring your AVD infrastructure remains secure and performant.</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="text-align: center; padding: 3rem 0;">
+            <h2>Ready to Deploy AVD?</h2>
+            <p style="margin-bottom: 2rem;">Schedule a consultation with our AVD experts to design the perfect solution for your organization.</p>
+            <a href="contact.html" class="cta-button">Get Started with AVD</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 FalconCompute. All rights reserved. | Enterprise Cloud Solutions</p>
+        </div>
+    </footer>
+</body>
+</html>
