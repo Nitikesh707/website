@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FalconCompute | Cloud Engineering</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    body {
+      font-family: Inter, system-ui;
+      background: #f5f7fb;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    section {
+      padding: 70px 8vw
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      animation: heroSlide 30s steps(1, end) infinite;
+    }
+
+    /* Gradient stays same for all images */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at center,
+          rgba(0, 0, 0, 0.35) 20%,
+          rgba(0, 0, 0, 0.35) 100%);
+      z-index: 0;
+    }
+
+    .hero>* {
+      position: relative;
+      z-index: 1;
+    }
+
+
+
+    h1 {
+      font-size: 64px;
+      line-height: 1.05;
+      font-weight: 800;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, #2563eb, #06b6d4);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    p {
+      font-size: 18px;
+      color: #475569;
+      max-width: 520px;
+      margin-top: 24px
+    }
+
+    .cta {
+      margin-top: 40px;
+      display: inline-block;
+      padding: 16px 28px;
+      background-color: #1a1a2e;
+      color: white;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .canvas-wrap {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      border-radius: 32px;
+      background: white;
+      box-shadow: 0 600px 100px rgba(15, 23, 42, .08);
+      overflow: hidden;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 40px;
+    }
+
+    .code-scroll {
+      height: 2vh;
+      background-size: cover;
+      background-position: center top;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      border-radius: 6px;
+
+    }
+
+    .card {
+      background-color: #1a1a2e;
+      text-decoration: none;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 26px;
+      border-radius: 24px;
+      box-shadow: 0 20px 500px rgba(2, 6, 23, .06);
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+    }
+
+    .step {
+      background: white;
+      padding: 28px;
+      border-radius: 20px;
+      border-left: 6px solid #2563eb;
+    }
+
+    /* ================= HEADER ================= */
+    header {
+      background: #1a1a2e;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .logo img {
+      height: 22px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: #00d4ff;
+    }
+
+    .menu-toggle {
+      color: #ffffff;
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    @keyframes heroSlide {
+      0% {
+        background-image: url('assets/hero1.webp');
+      }
+
+      20% {
+        background-image: url('assets/hero2.webp');
+      }
+
+      40% {
+        background-image: url('assets/hero3.webp');
+      }
+
+      60% {
+        background-image: url('assets/hero4.webp');
+      }
+
+      80% {
+        background-image: url('assets/hero5.webp');
+      }
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--primary);
+      color: white;
+      background-color: #1a1a2e;
+
+      padding: clamp(2.5rem, 6vw, 5rem) 1.5rem 1rem;
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 3rem;
+    }
+
+    .footer-section h3 {
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-section ul li a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: clamp(0.9rem, 2vw, 0.95rem);
+    }
+
+    .footer-section ul li a:hover {
+      color: var(--accent-teal);
+    }
+
+    .footer-section p {
+      font-size: clamp(0.9rem, 2vw, 0.95rem);
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.6;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: clamp(0.85rem, 2vw, 0.9rem);
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .social-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+    }
+
+    .social-links a:hover {
+      color: var(--accent-teal);
+    }
+
+    /* ================= MOBILE ================= */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        background: #1a1a2e;
+        flex-direction: column;
+        align-items: center;
+        gap: 22px;
+        padding: 28px 0;
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+    }
+
+    .gradient-box {
+      padding: 25px;
+      border: 2px solid color #1a1a2e;
+      color: #ffffff;
+      min-width: 100%;
+    }
+
+    .logo-icon {
+      height: 20px;
+      /* adjust as needed */
+      width: auto;
+      object-fit: contain;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP HEADER WITH NAVIGATION -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <img src="assets/logo.png" alt="FalconCompute" />
+        FalconCompute
+      </a>
+
+      <div class="menu-toggle" id="menuToggle">☰</div>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#expertise">Expertise</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#about">About</a>
+        <a href="/contact.html">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1 style="font-size: 250%; color: #ffffff;">Enterprise Cloud & M365 Solutions Crafted for Excellence</h1>
+      <p style="font-size:120%;color: #fbff00; text-shadow: 0 0 11px rgba(0,0,0,15);font-weight:lighter;">FalconCompute
+        designs high‑reliability cloud platforms using
+        automation, security‑first architecture, and cost
+        governance.</p>
+      <a class="cta" href="#services">Explore Cloud</a>
+    </div>
+    <div class="canvas-wrap">
+      <canvas id="net"
+        style="background-image: url('assets/net.avif'); background-size: contain; background-repeat: no-repeat; background-position: center;"></canvas>
+    </div>
+  </section>
+
+  <h1 style="font-size:20px;margin-top: 50px; text-align:center; color: #1a1a2e;">
+    Empower your digital transformation with FalconCompute’s trusted cloud
+    expertise.
+  </h1>
+
+  <section id="expertise">
+    <h1 style="font-size:30px; margin-bottom:50px; text-align:center;">
+      Core Expertise
+    </h1>
+    <div class=" card-grid">
+      <a class="card" href="azure-infrastructure.html">Azure Infrastructure</a>
+      <a class="card" href="microsoft-365.html">Microsoft-365</a>
+      <a class="card" href="performance.html">Performance Optimization</a>
+      <a class="card" href="web-applications.html">Web Applications</a>
+      <a class="card" href="web-applications.html">Website Hosting</a>
+      <a class="card" href="devops.html">Automation</a>
+      <a class="card" href="modernization.html">Modernization</a>
+      <a class="card" href="security-compliance.html">Security & Compliance</a>
+      <a class="card" href="cost-optimization.html">Cost Optimization</a>
+
+    </div>
+  </section>
+  <div style="
+  height: 50px;
+  background-color: #1a1a2e;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 2px;
+">
+    Automate your Infrastructure
+  </div>
+
+  <section class="code-scroll" style="background-image: url('assets/powershell-code.webp');"> </section>
+  <p style="min-width: 100%;color: #1a1a2e;">
+    Our expertise lies in delivering modern, automated cloud infrastructure through Infrastructure-as-Code, ARM
+    templates, PowerShell automation, and CI/CD pipelines. We simplify complex deployment processes by replacing manual
+    tasks with intelligent, repeatable workflows that ensure consistency, security, and reliability across environments.
+    By codifying infrastructure and integrating automated pipelines, we enable faster releases, reduced risk, and
+    predictable outcomes. Our approach empowers organizations to scale confidently, maintain strong governance, and
+    achieve operational excellence while adapting quickly to evolving business and technology demands.
+  </p>
+
+  <div style="
+  height: 60px;
+  background-color: #1a1a2e;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 2px;
+  margin-top: 100px;
+">
+    Empower your digital transformation with FalconCompute’s trusted cloud expertise
+  </div>
+  <section class="code-scroll" style="background-image: url('assets/devops.webp');"> </section>
+  <p style="min-width: 100%;color: #1a1a2e;">
+    Empower your digital transformation with FalconCompute’s trusted cloud expertise. We deliver enterprise-grade cloud
+    solutions designed to elevate performance, security, and scalability at every stage of growth. FalconCompute
+    combines deep technical mastery with strategic insight to help organizations modernize infrastructure, accelerate
+    innovation, and operate with confidence in a cloud-first world. Our approach transforms complexity into clarity,
+    enabling resilient, future-ready digital platforms that adapt to evolving business demands. Trusted by
+    forward-thinking enterprises, we turn cloud vision into execution—driving measurable outcomes, competitive
+    advantage, and long-term digital excellence.
+  </p>
+
+  <div style="
+  height: 60px;
+  background-color: #1a1a2e;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 2px;
+  margin-top: 100px;
+">
+    Secure, scalable M365 solutions with Entra ID, Teams & SharePoint built for modern work.
+  </div>
+  <section class="code-scroll" style="background-image: url('assets/microsoft.webp');"> </section>
+
+
+  <section>
+    <h1 style="font-size:40px;margin-bottom:60px">Engineering Process</h1>
+    <div class="timeline">
+      <div class="step">Discover & Assess</div>
+      <div class="step">Design Architecture</div>
+      <div class="step">Automate & Build</div>
+      <div class="step">Migrate & Validate</div>
+      <div class="step">Operate & Optimize</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>FalconCompute</h3>
+        <p>Specialized cloud infrastructure solutions delivered by expert engineers committed to your
+          success.
+        </p>
+      </div>
+      <div class="footer-section">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="expertise/azure-infrastructure.html">Azure Cloud</a></li>
+          <li><a href="specialized/avd.html">AVD Solutions</a></li>
+          <li><a href="specialized/migration.html">Migration</a></li>
+          <li><a href="expertise/security-compliance.html">Security</a></li>
+          <li><a href="specialized/cost-optimization.html">Cost Optimization</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#expertise">Expertise</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#terms">Terms of Service</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#compliance">Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2025 FalconCompute. All rights reserved. | Built with precision for excellence.</div>
+      <div class="social-links">
+        <a href="https://x.com/YOURPAGE" title="LinkedIn">in</a>
+        <a href="https://instagram.com/YOURPAGE" title="Instagram">📷</a>
+        <a href="#twitter" title="Twitter">𝕏</a>
+        <a href="#github" title="GitHub">⚙</a>
+        <a href="#email" title="Email">✉</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+
+    const toggle = document.getElementById("menuToggle");
+    const nav = document.getElementById("navLinks");
+
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("active");
+    });
+
+    const c = document.getElementById('net'), x = c.getContext('2d');
+    function resize() { c.width = c.offsetWidth; c.height = c.offsetHeight }
+    resize(); window.addEventListener('resize', resize);
+    let nodes = [...Array(40)].map(() => ({ x: Math.random() * c.width, y: Math.random() * c.height, vx: (Math.random() - .5) * .6, vy: (Math.random() - .5) * .6 }));
+    function draw() {
+      x.clearRect(0, 0, c.width, c.height);
+      nodes.forEach(n => {
+        n.x += n.vx; n.y += n.vy;
+        if (n.x < 0 || n.x > c.width) n.vx *= -1;
+        if (n.y < 0 || n.y > c.height) n.vy *= -1;
+        nodes.forEach(o => {
+          let d = Math.hypot(n.x - o.x, n.y - o.y);
+          if (d < 120) {
+            x.strokeStyle = 'rgba(37,99,235,.15)';
+            x.beginPath(); x.moveTo(n.x, n.y); x.lineTo(o.x, o.y); x.stroke();
+          }
+        });
+        x.fillStyle = '#2563eb';
+        x.beginPath(); x.arc(n.x, n.y, 2, 0, Math.PI * 2); x.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    gsap.utils.toArray('.card,.step').forEach(el => {
+      gsap.from(el, { opacity: 0, y: 60, scrollTrigger: { trigger: el, start: 'top 85%' }, duration: .8, ease: 'power3.out' });
+    });
+  </script>
+
+</body>
+
+</html>

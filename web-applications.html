@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FalconCompute | Cloud Engineering</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    body {
+      font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text-primary);
+      background-color: var(--bg-light);
+      line-height: 1.6;
+    }
+
+    section {
+      padding: 10px 8vw
+    }
+
+    .hero {
+      height: 70vh;
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      animation: heroSlide 30s steps(1, end) infinite;
+      object-fit: none;
+
+    }
+
+    /* Gradient stays same for all images */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero>* {
+      position: relative;
+      z-index: 1;
+    }
+
+
+
+    h1 {
+      font-size: 64px;
+      line-height: 1.05;
+      font-weight: 800;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, #2563eb, #06b6d4);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    p {
+      font-size: 18px;
+      color: #475569;
+      max-width: 520px;
+      margin-top: 24px
+    }
+
+    .cta {
+      margin-top: 40px;
+      display: inline-block;
+      padding: 16px 28px;
+      background-color: #1a1a2e;
+      color: white;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .canvas-wrap {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      border-radius: 32px;
+      background: white;
+      box-shadow: 0 600px 100px rgba(15, 23, 42, .08);
+      overflow: hidden;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .code-scroll {
+      height: 2vh;
+      background-size: cover;
+      background-position: center top;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      border-radius: 6px;
+
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      border-left: 4px solid #2a5298;
+    }
+
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+    }
+
+    .step {
+      background: white;
+      padding: 28px;
+      border-radius: 20px;
+      border-left: 6px solid #2563eb;
+    }
+
+    /* ================= HEADER ================= */
+    header {
+      background: #1a1a2e;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .logo img {
+      height: 22px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: #00d4ff;
+    }
+
+    .menu-toggle {
+      color: #ffffff;
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    @keyframes heroSlide {
+      0% {
+        background-image: url('assets/bg.png');
+      }
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--primary);
+      color: white;
+      background-color: #1a1a2e;
+
+      padding: clamp(2.5rem, 6vw, 5rem) 1.5rem 1rem;
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 3rem;
+    }
+
+    .footer-section h3 {
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-section ul li a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: clamp(0.9rem, 2vw, 0.95rem);
+    }
+
+    .footer-section ul li a:hover {
+      color: var(--accent-teal);
+    }
+
+    .footer-section p {
+      font-size: clamp(0.9rem, 2vw, 0.95rem);
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.6;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: clamp(0.85rem, 2vw, 0.9rem);
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .content-white {
+      background: #ffffff;
+      padding: 80px 8vw;
+    }
+
+    .content-white p {
+      margin: 0;
+      color: #1a1a2e;
+    }
+
+    .social-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+    }
+
+    .social-links a:hover {
+      color: var(--accent-teal);
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #1e3c72;
+      border-bottom: 3px solid #2a5298;
+      padding-bottom: 1rem;
+    }
+
+    h5 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: #2a5298;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid #2a5298;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h3 {
+      margin-bottom: 1rem;
+    }
+
+    .card h5 {
+      display: block;
+      width: 100%;
+      white-space: nowrap;
+      /* 👈 keeps heading in one line */
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      color: #666;
+      line-height: 1.8;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(42, 82, 152, 0.4);
+    }
+
+    /* ================= MOBILE ================= */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        background: #1a1a2e;
+        flex-direction: column;
+        align-items: center;
+        gap: 22px;
+        padding: 28px 0;
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+    }
+
+    .gradient-box {
+      padding: 25px;
+      border: 2px solid color #1a1a2e;
+      color: #ffffff;
+      min-width: 100%;
+    }
+
+    .logo-icon {
+      height: 20px;
+      /* adjust as needed */
+      width: auto;
+      object-fit: contain;
+    }
+  </style>
+</head>
+
+<body style="background-image: url(assets/bg2.jpg);background-size:contain">
+
+  <!-- TOP HEADER WITH NAVIGATION -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="FalconCompute" />
+        FalconCompute
+      </a>
+
+      <div class="menu-toggle" id="menuToggle">☰</div>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#expertise">Expertise</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1 style="font-size: 250%; color: #ffffff;">Modern Web Applications</h1>
+      <p style="font-size:120%;color: #fbff00; text-shadow: 0 0 11px rgba(0,0,0,15);font-weight:lighter;">Modern web applications, API development, container orchestration, and performance tuning built on enterprise infrastructure that scales seamlessly.</p>
+    </div>
+    <div class="canvas-wrap">
+      <canvas id="net"
+        style="background-image: url('assets/net.avif'); background-size: contain; background-repeat: no-repeat; background-position: center;"></canvas>
+    </div>
+  </section>
+
+
+
+  <main class="container">
+    <section>
+      <h2>Enterprise Web Solutions</h2>
+      <p1>Building modern applications requires understanding cloud infrastructure, scalability, and security. We design and deploy applications on Azure that grow with your business.</p1>
+    </section>
+
+        <section>
+            <h2>Web Development Services</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Full-Stack Development</h3>
+                    <p>Custom applications using modern frameworks deployed on Azure App Service.</p>
+                </div>
+                <div class="card">
+                    <h3>API Development</h3>
+                    <p>RESTful and GraphQL APIs designed for performance and seamless integration.</p>
+                </div>
+                <div class="card">
+                    <h3>Frontend Architecture</h3>
+                    <p>React, Angular, Vue.js applications with responsive design and optimization.</p>
+                </div>
+                <div class="card">
+                    <h3>Backend Services</h3>
+                    <p>Node.js, .NET, Python services with database optimization and caching.</p>
+                </div>
+                <div class="card">
+                    <h3>Container Deployment</h3>
+                    <p>Docker containerization for consistent deployment across environments.</p>
+                </div>
+                <div class="card">
+                    <h3>Performance Tuning</h3>
+                    <p>Load testing, CDN optimization, and caching for fast applications.</p>
+                </div>
+            </div>
+        </section>
+
+    <section style="text-align: center; padding: 3rem 0;">
+      <h2>Build Scalable Web Applications</h2>
+      <p1 style="text-align: center !important;">Let's create a modern web solution on Azure that scales with your business.</p1>
+      <div style="margin-bottom: 10px;"></div>
+      <a href="contact.html" class="cta-button">Schedule Consultation</a>
+
+    </section>
+
+  </main>
+
+
+
+
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>FalconCompute</h3>
+        <p>Specialized cloud infrastructure solutions delivered by expert engineers committed to your
+          success.
+        </p>
+      </div>
+      <div class="footer-section">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="expertise/azure-infrastructure.html">Azure Cloud</a></li>
+          <li><a href="specialized/avd.html">AVD Solutions</a></li>
+          <li><a href="specialized/migration.html">Migration</a></li>
+          <li><a href="expertise/security-compliance.html">Security</a></li>
+          <li><a href="specialized/cost-optimization.html">Cost Optimization</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#expertise">Expertise</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#terms">Terms of Service</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#compliance">Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2025 FalconCompute. All rights reserved. | Built with precision for excellence.</div>
+      <div class="social-links">
+        <a href="https://x.com/YOURPAGE" title="LinkedIn">in</a>
+        <a href="https://instagram.com/YOURPAGE" title="Instagram">📷</a>
+        <a href="#twitter" title="Twitter">𝕏</a>
+        <a href="#github" title="GitHub">⚙</a>
+        <a href="#email" title="Email">✉</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+
+    const toggle = document.getElementById("menuToggle");
+    const nav = document.getElementById("navLinks");
+
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("active");
+    });
+
+    const c = document.getElementById('net'), x = c.getContext('2d');
+    function resize() { c.width = c.offsetWidth; c.height = c.offsetHeight }
+    resize(); window.addEventListener('resize', resize);
+    let nodes = [...Array(40)].map(() => ({ x: Math.random() * c.width, y: Math.random() * c.height, vx: (Math.random() - .5) * .6, vy: (Math.random() - .5) * .6 }));
+    function draw() {
+      x.clearRect(0, 0, c.width, c.height);
+      nodes.forEach(n => {
+        n.x += n.vx; n.y += n.vy;
+        if (n.x < 0 || n.x > c.width) n.vx *= -1;
+        if (n.y < 0 || n.y > c.height) n.vy *= -1;
+        nodes.forEach(o => {
+          let d = Math.hypot(n.x - o.x, n.y - o.y);
+          if (d < 120) {
+            x.strokeStyle = 'rgba(37,99,235,.15)';
+            x.beginPath(); x.moveTo(n.x, n.y); x.lineTo(o.x, o.y); x.stroke();
+          }
+        });
+        x.fillStyle = '#2563eb';
+        x.beginPath(); x.arc(n.x, n.y, 2, 0, Math.PI * 2); x.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    gsap.utils.toArray('.card,.step').forEach(el => {
+      gsap.from(el, { opacity: 0, y: 60, scrollTrigger: { trigger: el, start: 'top 85%' }, duration: .8, ease: 'power3.out' });
+    });
+  </script>
+
+</body>
+
+</html>
